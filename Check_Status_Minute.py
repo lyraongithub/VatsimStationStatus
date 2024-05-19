@@ -1,10 +1,14 @@
 import requests
 import time
 from datetime import datetime, timezone
+import json
+
+# Load configuration from a JSON file
+with open('config.json', 'r') as config_file:
+    config = json.load(config_file)
 
 # VATSIM API endpoint for online users
-url = "https://data.vatsim.net/v3/vatsim-data.json"
-
+url = config['VATSIM_API_URL']
 # Fetch the data from the VATSIM API
 response = requests.get(url)
 data = response.json()
