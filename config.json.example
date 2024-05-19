@@ -1,3 +1,4 @@
 {
-    "VATSIM_API_URL": "https://data.vatsim.net/v3/vatsim-data.json"
+    "VATSIM_API_URL": "https://data.vatsim.net/v3/vatsim-data.json",
+    "DISCORD_WEBHOOK_URL": "YOUR_DISCORD_WEBHOOK_URL"
 }
