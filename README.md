@@ -10,6 +10,12 @@ The script in the root directory is the script currently under development, with
 ```
 pip install requirements.txt
 ```
+It is worth noteing that this file will reflect the requirements for the latest version of the script, so some unrequired libs may be installed.
+
+2. Run the script of choice through your preffered method.
+```
+python3 SCRIPT_OF_CHOICE
+```
 
 ## Still in developmment:
 - [ ] Inpliment setting of station at startup.
