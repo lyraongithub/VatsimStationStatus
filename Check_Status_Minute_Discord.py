@@ -21,7 +21,7 @@ flights = data.get('pilots', [])
 def is_atc_position_active(callsign):
     for controller in controllers:
         if controller.get('callsign') == callsign:
-            return True, controller
+            return True, controller.get('frequency')
     return False, None
 
 # Function to count departures from a specific airport
@@ -53,23 +53,22 @@ def post_to_discord(message):
     }
     response = requests.post(config['DISCORD_WEBHOOK_URL'], json=data)
     if response.status_code == 204:
-        #print("Message successfully sent to Discord.")
         status = 1
     else:
         print(f"Failed to send message to Discord. Status code: {response.status_code}")
+        status = 0
 
 
-def check_status(active, zulu_time_str):
+def check_status(active, zulu_time_str, frequency):
     if active:
-        print(f"{zulu_time_str}\n{callsign_to_check} is active.")
-        #print("Controller Info:", controller_info)
+        print(f"{zulu_time_str}\n{callsign_to_check} is active. ({frequency}MHz)")
         # Count departures if station is active
         airport_code = "EGNX"  # Airport ICAO code
         num_departures = count_departures(airport_code)
         num_arrivals = count_arrivals(airport_code)
         print(f"Number of departures from {airport_code}: {num_departures}\nNumber of arrivals to {airport_code}: {num_arrivals}\n")
 
-        message = (f"{zulu_time_str}\n{callsign_to_check} is active.\n"
+        message = (f"{zulu_time_str}\n{callsign_to_check} is active on {frequency}MHz.\n"
                    f"Number of departures from {airport_code}: {num_departures}\n"
                    f"Number of arrivals to {airport_code}: {num_arrivals}\n")
         post_to_discord(message)
@@ -80,10 +79,10 @@ def check_status(active, zulu_time_str):
 while(True):
     # Check the status of station
     callsign_to_check = "EGNX_GND"
-    active, controller_info = is_atc_position_active(callsign_to_check)
+    active, frequency = is_atc_position_active(callsign_to_check)
 
     current_zulu_time = datetime.now(timezone.utc)
     zulu_time_str = current_zulu_time.strftime('Current Time: %H:%Mz')
 
-    check_status(active, zulu_time_str)
+    check_status(active, zulu_time_str, frequency)
     time.sleep(60)

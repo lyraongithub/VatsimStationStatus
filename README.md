@@ -3,7 +3,7 @@
 Have you ever wanted a simple script to monitor the statis of ATC at your favourite airport on VATSIM? Then look no further.
 VatsimStationStatus solves this issue by providing a number of scripts to accomidate a number of scenarios.
 
-The script in the root directory is the script currently under development, with previous (completed) scripts in the /old_scripts directory. These older scripts are unikely to recieve bug fixes.
+The script in the root directory is the script currently under development, with previous (completed) scripts in the /old_scripts directory. Unfortuantly, these older scripts are unikely to recieve bug fixes.
 
 ## Still in developmment:
 - [ ] Inpliment setting of station at startup.
